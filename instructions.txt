@@ -1,0 +1,9 @@
+✅ Mouse Movement: Thumb near index, index finger bent
+✅ Left Click: Index finger bent, middle straight, thumb far
+✅ Right Click: Middle finger bent, index straight, thumb far
+✅ Double Click: Both index and middle bent, thumb far
+✅ Screenshot: All fingers close together
+🆕 Scroll Up/Down: Index finger up, others closed
+🆕 Drag & Drop: Index & middle up, thumb close
+🆕 Volume Up: Thumb tip (4) close to pinky tip (20), and middle finger tip (12) close to ring finger tip (16)
+🆕 Volume Down: Thumb tip (4) close to middle finger tip (12), and middle finger tip (12) close to ring finger tip (16)
