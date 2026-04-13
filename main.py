@@ -140,12 +140,16 @@ def detect_gesture(frame, landmark_list, processed):
         thumb_index_dist = util.get_distance([landmark_list[4], landmark_list[5]])
 
         if util.get_distance([landmark_list[4], landmark_list[8]]) < 50  and util.get_angle(landmark_list[5], landmark_list[6], landmark_list[8]) > 90:
+            print("Mouse movement gesture detected!")
             move_mouse(index_finger_tip)
-            drag_active = False  # Reset drag when moving mouse
-        elif is_scroll_gesture(landmark_list):
-            handle_scroll_gesture(frame, index_finger_tip)
-            drag_active = False  # Reset drag when scrolling
+            cv2.putText(frame, "MOVING MOUSE", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+            # drag_active = False  # Reset drag when moving mouse
+        # elif is_scroll_gesture(landmark_list):
+        #     print("Scroll gesture detected!")
+        #     handle_scroll_gesture(frame, index_finger_tip)
+            # drag_active = False  # Reset drag when scrolling
         elif is_drag_gesture(landmark_list, thumb_index_dist):
+            print("Drag gesture detected!")
             handle_drag_gesture(frame, index_finger_tip)
         elif is_volume_up_gesture(landmark_list):
             set_volume(increase=True)
@@ -239,12 +243,21 @@ def main():
                 draw.draw_landmarks(frame, hand_landmarks, mpHands.HAND_CONNECTIONS)
                 for lm in hand_landmarks.landmark:
                     landmark_list.append((lm.x, lm.y))
+            # Debug: show hand detection status
+            if processed.multi_hand_landmarks:
+                cv2.putText(frame, "HAND DETECTED", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+            else:
+                cv2.putText(frame, "NO HAND DETECTED", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
             detect_gesture(frame, landmark_list, processed)
+            cv2.namedWindow('Frame', cv2.WINDOW_NORMAL)
+            cv2.moveWindow('Frame', 10, 10)
+            cv2.resizeWindow('Frame', 640, 480)
 
             cv2.imshow('Frame', frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('q'):
+                break 
     finally:
         cap.release()
         cv2.destroyAllWindows()
