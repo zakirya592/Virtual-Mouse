@@ -41,6 +41,10 @@ def move_mouse(index_finger_tip):
         y = int(index_finger_tip.y / 2 * screen_height)
         pyautogui.moveTo(x, y)
 
+def move_mouse_relative(dx, dy):
+    """Move mouse relative to current position"""
+    pyautogui.move(dx, dy)
+
 
 def is_left_click(landmark_list, thumb_index_dist):
     return (
