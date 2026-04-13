@@ -60,8 +60,10 @@ def is_right_click(landmark_list, thumb_index_dist):
 
 def is_double_click(landmark_list, thumb_index_dist):
     return (
-            util.get_angle(landmark_list[5], landmark_list[6], landmark_list[8]) < 50 and
-            util.get_angle(landmark_list[9], landmark_list[10], landmark_list[12]) < 50 and
+            util.get_angle(landmark_list[5], landmark_list[6], landmark_list[8]) > 90 and  # Index finger open
+            util.get_angle(landmark_list[9], landmark_list[10], landmark_list[12]) > 90 and  # Middle finger open
+            util.get_angle(landmark_list[13], landmark_list[14], landmark_list[16]) < 50 and  # Ring finger closed
+            util.get_angle(landmark_list[17], landmark_list[18], landmark_list[20]) < 50 and  # Pinky finger closed
             thumb_index_dist > 50
     )
 
